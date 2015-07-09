@@ -1,4 +1,4 @@
- >>>>>>>>>>>>>>>>>>>>>>简单的C语言编译器<br>
+<big>简单的C语言编译器<big><br>
  =================
  
 以前只用编译器编译程序，现在学完编译原理这门课以后，通过编译大作业，我对编译器的工作原理有了比较清晰的认识<br> 
@@ -128,7 +128,7 @@ B->for(YZ;G@FOR_FJ;Q){A@SINGLE}@FOR_RJ@FOR_BACKPATCH_FJ {参照if else } <br>
 主界面 <br>
 ![](http://img.blog.csdn.net/20150628153513997) 
 主界面代码<br>
-~~~~~~~~~~~~~
+~~~~~~~~~~~~~java
 package gui;
 
 import java.awt.*;
