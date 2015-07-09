@@ -1,4 +1,4 @@
- 简单的C语言编译器<br>
+ >>>>>>>>>>>>>>>>>>>>>>简单的C语言编译器<br>
  =================
  
 以前只用编译器编译程序，现在学完编译原理这门课以后，通过编译大作业，我对编译器的工作原理有了比较清晰的认识<br> 
@@ -36,98 +36,98 @@
 
 编译大作业: <br>
 LL1文法: <br>
-1、 文法开始： 
-S->void main(){A} 
-2、 声明： 
-X->YZ; 
-Y->int|char|bool 
-Z->UZ’ 
-Z’->,Z|U−>idU′U′−>=L| 
-3、 赋值： 
-R->id=L; 
-4、 算术运算： 
-L->TL’ 
-L’->+L|-L|T−>FT′T′−>∗T|/T| 
-F->(L) 
-F->id|num 
-O->++|–|Q−>idO| 
-5、 布尔运算 
-E->HE’ 
-E’->&&E|H−>GH′H′−>||HH′−> 
-G->FDF 
-D-><|>|==|!= 
-G->(E) 
-G->!E 
-5、控制语句 
-B->if (E){A}else{A} 
-B->while(E){A} 
-B->for(YZ;G;Q){A} 
-6、功能函数 
-B->printf(P); 
-B->scanf(id); 
-P->id|ch|num
+1、 文法开始： <br>
+S->void main(){A} <br>
+2、 声明： <br>
+X->YZ; <br>
+Y->int|char|bool <br>
+Z->UZ’ <br>
+Z’->,Z|U−>idU′U′−>=L| <br>
+3、 赋值：<br> 
+R->id=L; <br>
+4、 算术运算： <br>
+L->TL’ <br>
+L’->+L|-L|T−>FT′T′−>∗T|/T| <br>
+F->(L) <br>
+F->id|num <br>
+O->++|–|Q−>idO| <br>
+5、 布尔运算 <br>
+E->HE’ <br>
+E’->&&E|H−>GH′H′−>||HH′−> <br>
+G->FDF <br>
+D-><|>|==|!= <br>
+G->(E) <br>
+G->!E <br>
+5、控制语句 <br>
+B->if (E){A}else{A} <br>
+B->while(E){A} <br>
+B->for(YZ;G;Q){A} <br>
+6、功能函数 <br>
+B->printf(P); <br>
+B->scanf(id); <br>
+P->id|ch|num<br>
 
-7、复合语句 
-A->CA 
-C->X|B|R 
-A->$
+7、复合语句 <br>
+A->CA <br>
+C->X|B|R <br>
+A->$<br>
 
-1、构造LL1属性翻译文法 
-构造LL1属性翻译文法即在原有LL1文法基础上加上动作符号，并给非终结符和终结符加上一定属性，给动作符号加上语义子程序。对原有LL1文法改进的地方如下： 
-1、 赋值： 
-产生式 语义子程序
+1、构造LL1属性翻译文法 <br>
+构造LL1属性翻译文法即在原有LL1文法基础上加上动作符号，并给非终结符和终结符加上一定属性，给动作符号加上语义子程序。对原有LL1文法改进的地方如下： <br>
+1、 赋值： <br>
+产生式 语义子程序<br>
 
-R->@ASS_R id =L@ EQ; @ASS{R.VAL=id并压入语义栈} 
-@EQ{RES=R.VAL,OP=’=’,ARG1=L.VAL, 
-new fourElement(OP,ARG1,/, RES)} 
-U->@ASS_UidU’ {U.VAL=id并压入语义栈} 
-U’->=L|$@EQ_U’ {RES=U.VAL,OP=’=’,ARG1=L.VAL,new fourElement(OP,ARG1,/, RES)}
+R->@ASS_R id =L@ EQ; @ASS{R.VAL=id并压入语义栈} <br>
+@EQ{RES=R.VAL,OP=’=’,ARG1=L.VAL, <br>
+new fourElement(OP,ARG1,/, RES)} <br>
+U->@ASS_UidU’ {U.VAL=id并压入语义栈} <br>
+U’->=L|$@EQ_U’ {RES=U.VAL,OP=’=’,ARG1=L.VAL,new fourElement(OP,ARG1,/, RES)}<br>
 
-2、 算术运算： 
-产生式 语义子程序
+2、 算术运算： <br>
+产生式 语义子程序<br>
 
-L->TL’@ADD_SUB {If(OP!=null) RES= NEWTEMP; L.VAL=RES,并压入语义栈;New fourElement(OP, T.VAL;,L’VAL, RES)， 
-} 
-L’->+L@ADD {OP=+,ARG2=L.VAL} 
-L’->-L@SUB {OP=-,ARG2=L.VAL} 
-L’->$ 
-T->FT’@DIV_MUL { if (OP !=null) RES= NEWTEMP;T.VAL=RES; 
-new FourElement(OP,F.VAL,ARG2, RES) 
-else ARG1=F.VAL; } 
-T’->/T@DIV {OP=/,ARG2=T.VAL} 
-T’->T@MUL {OP=,ARG2=T.VAL} 
-T’->F−>(L)@VOLF.VAL−>L.VALF−>@ASSFnum|idF.VAL=num|idQ−>idO| 
-O->@SINGLE_OP++|– {OP=++|–}
+L->TL’@ADD_SUB {If(OP!=null) RES= NEWTEMP; L.VAL=RES,并压入语义栈;New fourElement(OP, T.VAL;,L’VAL, RES)， <br>
+} <br>
+L’->+L@ADD {OP=+,ARG2=L.VAL} <br>
+L’->-L@SUB {OP=-,ARG2=L.VAL} <br>
+L’->$ <br>
+T->FT’@DIV_MUL { if (OP !=null) RES= NEWTEMP;T.VAL=RES; <br>
+new FourElement(OP,F.VAL,ARG2, RES) <br>
+else ARG1=F.VAL; } <br>
+T’->/T@DIV {OP=/,ARG2=T.VAL} <br>
+T’->T@MUL {OP=,ARG2=T.VAL} <br>
+T’->F−>(L)@VOLF.VAL−>L.VALF−>@ASSFnum|idF.VAL=num|idQ−>idO| <br>
+O->@SINGLE_OP++|– {OP=++|–}<br>
 
-3、 布尔运算 
-产生式 语义子程序
+3、 布尔运算 <br>
+产生式 语义子程序<br>
 
-G->FDF@COMPARE{OP=D.VAL;ARG1=F(1).VAL;ARG2=F(2).VAL,RES=NEWTEMP; 
-New fourElement(OP,F.VAL,ARG2, RES );G.VAL=RES并压入语义栈} 
-D->@COMPARE_OP<|>|==|!={D.VAL=<|>|==|!=,并压入语栈}
+G->FDF@COMPARE{OP=D.VAL;ARG1=F(1).VAL;ARG2=F(2).VAL,RES=NEWTEMP; <br>
+New fourElement(OP,F.VAL,ARG2, RES );G.VAL=RES并压入语义栈} <br>
+D->@COMPARE_OP<|>|==|!={D.VAL=<|>|==|!=,并压入语栈}<br>
 
-4、 控制语句 
-产生式 语义子程序 
-B->if (G)@IF_FJ{A}@IF_BACKPATCH_FJ @IF_RJ else{A}@IF_BACKPATCH_RJ 
-@IF_FJ{OP=”FJ”;ARG1=G.VAL;RES=if_fj, New fourElement(OP,ARG1,/, RES ),将其插入到四元式列表中第i个} 
-@IF_BACKPATCH_FJ{回填前面假出口跳转四元式的跳转序号, BACKPATCH (i,if_fj)} 
-B->while(G)@WHILE_FJ{A}@WHILE_RJ@WHILE_BACKPATCH_FJ {参照if else} 
-B->for(YZ;G@FOR_FJ;Q){A@SINGLE}@FOR_RJ@FOR_BACKPATCH_FJ {参照if else } 
-@SINGLE {ARG1=id;RES=NEWTEMP;New fourElement(OP,ARG1,/,RES)}
+4、 控制语句 <br>
+产生式 语义子程序 <br>
+B->if (G)@IF_FJ{A}@IF_BACKPATCH_FJ @IF_RJ else{A}@IF_BACKPATCH_RJ <br>
+@IF_FJ{OP=”FJ”;ARG1=G.VAL;RES=if_fj, New fourElement(OP,ARG1,/, RES ),将其插入到四元式列表中第i个} <br>
+@IF_BACKPATCH_FJ{回填前面假出口跳转四元式的跳转序号, BACKPATCH (i,if_fj)} <br>
+B->while(G)@WHILE_FJ{A}@WHILE_RJ@WHILE_BACKPATCH_FJ {参照if else} <br>
+B->for(YZ;G@FOR_FJ;Q){A@SINGLE}@FOR_RJ@FOR_BACKPATCH_FJ {参照if else } <br>
+@SINGLE {ARG1=id;RES=NEWTEMP;New fourElement(OP,ARG1,/,RES)}<br>
 
-说明： 
-（1）、R.VAL表示符号R的值，VAL是R的一个属性，其它类似。 
-（2）、NEWTEMP()函数：每调用一次生成一个临时变量，依次为T1，T2，…Tn。 
+说明： <br>
+（1）、R.VAL表示符号R的值，VAL是R的一个属性，其它类似。 <br>
+（2）、NEWTEMP()函数：每调用一次生成一个临时变量，依次为T1，T2，…Tn。 <br><br>
 （3）、BACKPATCH (int i,int res):回填函数，用res回填第i个四元式的跳转地址。 
-（4）、new fourElement（String OP,String ARG1,String ARG2,String RES ）:生成一个四元式 
+（4）、new fourElement（String OP,String ARG1,String ARG2,String RES ）:生成一个四元式 <br>
 （OP,ARG1,ARG2,RES）
 
-工程列表 
+工程列表 <br>
 ![](http://img.blog.csdn.net/20150628153430389) 
 
-主界面 
+主界面 <br>
 ![](http://img.blog.csdn.net/20150628153513997) 
-主界面代码
+主界面代码<br>
 ~~~~~~~~~~~~~
 package gui;
 
@@ -361,14 +361,14 @@ class FilePanel extends JPanel {
     }
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~
-词法分析:
-![](http://img.blog.csdn.net/20150628153601335)
+词法分析:<br>
+![](http://img.blog.csdn.net/20150628153601335)<br>
 
-语法分析：
-![](http://img.blog.csdn.net/20150628153632496)
+语法分析：<br>
+![](http://img.blog.csdn.net/20150628153632496)<br>
 
-中间代码生成:
-![](http://img.blog.csdn.net/20150628153649472)
+中间代码生成:<br>
+![](http://img.blog.csdn.net/20150628153649472)<br>
 
-目标代码生成:
-![](http://img.blog.csdn.net/20150628153707573)
+目标代码生成:<br>
+![](http://img.blog.csdn.net/20150628153707573)<br>
